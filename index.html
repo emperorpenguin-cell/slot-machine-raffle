@@ -1,37 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slot Machine Raffle</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Slot Machine Raffle</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Slot Machine Raffle</h1>
-
-        <!-- Input for Raffle Numbers -->
-        <textarea id="raffleEntries" rows="5" placeholder="Enter raffle numbers separated by spaces"></textarea>
-        <button id="submitEntries">Submit Entries</button>
-
-        <!-- Slot Machine (One Reel) -->
-        <div class="slot-machine">
-            <div id="reel" class="reel">0</div>
-        </div>
-
-        <button id="spinButton" disabled>Spin</button>
-        <p id="result"></p>
-
-        <!-- Background Music -->
-        <audio id="backgroundMusic" loop>
-            <source src="music.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
-
-        <!-- Particle Animation Background -->
-        <div id="particles"></div>
+  <div class="slot-machine">
+    <div class="reels">
+      <div class="slot" id="slot1">?</div>
+      <div class="slot" id="slot2">?</div>
+      <div class="slot" id="slot3">?</div>
     </div>
+    <div class="controls">
+      <input type="text" id="entries" placeholder="Enter raffle entries separated by spaces">
+      <button id="spinButton">Spin</button>
+    </div>
+    <audio id="bgMusic" autoplay loop>
+      <source src="casino-music.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+  <div class="celebration" id="celebration">Winner!</div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
+

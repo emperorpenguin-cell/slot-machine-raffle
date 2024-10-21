@@ -1,63 +1,63 @@
-let raffleEntries = [];
+// Selecting DOM elements
+const spinButton = document.getElementById('spinButton');
+const slot1 = document.getElementById('slot1');
+const slot2 = document.getElementById('slot2');
+const slot3 = document.getElementById('slot3');
+const celebration = document.getElementById('celebration');
+const entriesInput = document.getElementById('entries');
+let interval;
 
-// Function to get raffle entries from textarea input
-document.getElementById('submitEntries').addEventListener('click', () => {
-    const entriesText = document.getElementById('raffleEntries').value.trim();
-    
-    // Split input by spaces and clean up spaces
-    raffleEntries = entriesText.split(/\s+/).map(entry => entry.trim()).filter(entry => entry !== '');
-    
-    // Ensure all raffle entries are at most 14 characters
-    raffleEntries = raffleEntries.map(entry => entry.substring(0, 14));
-    
-    if (raffleEntries.length > 0) {
-        // Enable the spin button if entries are valid
-        document.getElementById('spinButton').disabled = false;
-        document.getElementById('result').innerText = 'Entries submitted! Press Spin to get the winner.';
-    } else {
-        document.getElementById('result').innerText = 'Please enter valid raffle entries.';
-        document.getElementById('spinButton').disabled = true;
-    }
-});
+// Adding sound effects for spin and win
+const spinSound = new Audio('spin-sound.mp3');
+const winSound = new Audio('win-sound.mp3');
 
-// Function to randomly pick a number from the raffle entries
-function getRandomEntry() {
-    return raffleEntries[Math.floor(Math.random() * raffleEntries.length)];
-}
+// Start slot spin on button click
+spinButton.addEventListener('click', function() {
+  let entries = entriesInput.value.split(" ");
+  if (entries.length === 0 || entries[0] === "") {
+    alert("Please enter some raffle entries.");
+    return;
+  }
 
-// Function to simulate the reel spin
-function spinReel(reel) {
-    const totalSpins = 300;  // Increased to make spin last approximately 30 seconds (with 100ms intervals)
-    let currentSpin = 0;
-    let spinInterval;
+  // Start spinning sound
+  spinSound.play();
 
-    return new Promise((resolve) => {
-        spinInterval = setInterval(() => {
-            reel.innerText = getRandomEntry();  // Show random raffle entry
-            currentSpin++;
-            if (currentSpin >= totalSpins) {
-                clearInterval(spinInterval);
-                resolve(reel.innerText);  // Return the final value (winner)
-            }
-        }, 100);  // Speed of spins (100ms per spin)
-    });
-}
+  // Activate slot animation
+  slot1.classList.add('active');
+  slot2.classList.add('active');
+  slot3.classList.add('active');
 
-// Main spin button event
-document.getElementById('spinButton').addEventListener('click', async () => {
-    const reel = document.getElementById('reel');
-    const music = document.getElementById('backgroundMusic');
+  // Set intervals to change slot text rapidly
+  interval = setInterval(() => {
+    let randomIndex1 = Math.floor(Math.random() * entries.length);
+    let randomIndex2 = Math.floor(Math.random() * entries.length);
+    let randomIndex3 = Math.floor(Math.random() * entries.length);
+    slot1.innerText = entries[randomIndex1];
+    slot2.innerText = entries[randomIndex2];
+    slot3.innerText = entries[randomIndex3];
+  }, 100);
 
-    // Start the background music
-    music.play();
+  // Stop after 45 seconds and pick the final winner
+  setTimeout(() => {
+    clearInterval(interval);
 
-    // Spin the reel and wait for it to stop
-    const winningNumber = await spinReel(reel);
-    
-    // Stop the music after spinning
-    music.pause();
-    music.currentTime = 0;  // Reset music to the beginning
+    // Stop slot animation
+    slot1.classList.remove('active');
+    slot2.classList.remove('active');
+    slot3.classList.remove('active');
 
-    // Display the winning number
-    document.getElementById('result').innerText = `🎉 Winner! Raffle Number: ${winningNumber}`;
+    // Select a final winner
+    let winnerIndex = Math.floor(Math.random() * entries.length);
+    slot1.innerText = entries[winnerIndex];
+    slot2.innerText = entries[winnerIndex];
+    slot3.innerText = entries[winnerIndex];
+
+    // Play win sound and show celebration
+    spinSound.pause();
+    winSound.play();
+    celebration.style.display = 'block';
+    setTimeout(() => {
+      celebration.style.display = 'none';
+    }, 5000);  // Celebration lasts for 5 seconds
+  }, 30000);  // 45 seconds
 });

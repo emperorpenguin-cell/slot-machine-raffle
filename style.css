@@ -1,120 +1,104 @@
-/* Main container style */
+/* General body and background styling */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    height: 100vh;
-    overflow: hidden;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradientBackground 15s ease infinite;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background: radial-gradient(circle, #000000, #1e1e1e);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Animation for gradient background */
-@keyframes gradientBackground {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* Particle Background */
-#particles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
-    overflow: hidden;
-}
-
-#particles::before, #particles::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(circle, rgba(255,255,255,0.1), transparent);
-    animation: particleMove 30s linear infinite;
-}
-
-#particles::after {
-    background-image: radial-gradient(circle, rgba(255,255,255,0.05), transparent);
-    animation-duration: 50s;
-}
-
-/* Particle animation to move particles in different directions */
-@keyframes particleMove {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(100%);
-    }
-}
-
-/* Slot machine container */
-.container {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(10px);
-    text-align: center;
-    color: white;
-    z-index: 1;
-    position: relative;
-}
-
-/* Slot machine styles */
+/* Slot Machine container */
 .slot-machine {
-    margin: 20px 0;
-    font-size: 3rem;
-    font-weight: bold;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border-radius: 10px;
+  width: 400px;
+  height: 500px;
+  background-color: #222;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  border: 5px solid #FFD700;
+  position: relative;
 }
 
-textarea, button {
-    padding: 10px;
-    margin: 10px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    width: 100%;
-    max-width: 400px;
+/* Reels container styling */
+.reels {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-textarea {
-    resize: none;
-    height: 100px;
+/* Slot styling */
+.slot {
+  width: 100px;
+  height: 100px;
+  background-color: #000;
+  border-radius: 10px;
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: #FFD700;
+  border: 3px solid #FFD700;
+}
+
+/* Controls section styling */
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+input {
+  font-size: 1em;
+  padding: 5px;
+  margin-bottom: 15px;
+  width: 100%;
 }
 
 button {
-    background-color: #23d5ab;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: #ff6200;
+  color: white;
+  font-size: 1.5em;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 button:hover {
-    background-color: #23a6d5;
+  background-color: #e55500;
 }
 
-#result {
-    font-size: 1.5rem;
-    margin-top: 20px;
-    font-weight: bold;
+/* Winning Celebration styling */
+.celebration {
+  position: absolute;
+  top: -50px;
+  font-size: 3em;
+  color: #FFD700;
+  display: none;
+  animation: celebration 1s ease-in-out infinite;
+}
+
+/* Animation for winner celebration */
+@keyframes celebration {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Slot spinning animation */
+.slot.active {
+  animation: spin 0.3s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotateX(0); }
+  100% { transform: rotateX(360deg); }
 }

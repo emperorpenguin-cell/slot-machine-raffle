@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slot Machine Raffle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Slot Machine Raffle</h1>
+
+        <!-- Input for Raffle Numbers -->
+        <textarea id="raffleEntries" rows="5" placeholder="Enter raffle numbers separated by spaces"></textarea>
+        <button id="submitEntries">Submit Entries</button>
+
+        <!-- Slot Machine (One Reel) -->
+        <div class="slot-machine">
+            <div id="reel" class="reel">0</div>
+        </div>
+
+        <button id="spinButton" disabled>Spin</button>
+        <p id="result"></p>
+
+        <!-- Background Music -->
+        <audio id="backgroundMusic" loop>
+            <source src="music.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- Particle Animation Background -->
+        <div id="particles"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

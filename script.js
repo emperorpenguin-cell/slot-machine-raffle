@@ -37,7 +37,7 @@ spinButton.addEventListener('click', function() {
     slot3.innerText = entries[randomIndex3];
   }, 100);
 
-  // Stop after 45 seconds and pick the final winner
+  // Stop after 30 seconds and pick the final winner
   setTimeout(() => {
     clearInterval(interval);
 
@@ -59,5 +59,5 @@ spinButton.addEventListener('click', function() {
     setTimeout(() => {
       celebration.style.display = 'none';
     }, 5000);  // Celebration lasts for 5 seconds
-  }, 30000);  // 45 seconds
+  }, 30000);  // 30 seconds
 });
